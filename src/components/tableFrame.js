@@ -1,20 +1,26 @@
+import TableSection from './tableSection';
+import {Row,Col} from 'react-bootstrap';
 
-const tableFrame = (props) =>{
+const TableFrame = (props) => {
     return <div>
-        <table className="table-secondary">
-            <thead>
-                <tr>
-                    <th scope="col">Name</th>
-                    <th scope="col">Impact</th>
-                    <th scope="col">LvLUp Requirement</th>
-                    <th scope="col">Level Up</th>
-                </tr>
+        <Row className='justify-content-center'>
+            <Col className='col-10'>
+            <table className="table table-bordered">
+                <thead className='thead-dark'>
+                    <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col">Impact</th>
+                        <th scope="col">LvLUp Requirement</th>
+                        <th scope="col">Level Up</th>
+                    </tr>
 
-            </thead>
-            <tableSection sectionName="Physical Body"></tableSection>
-            <tableSection sectionName="Super Powers"></tableSection>
-        </table>
-    </div>
+                </thead>
+                <TableSection sectionName="Physical Body"></TableSection>
+                <TableSection sectionName="Super Powers"></TableSection>
+            </table>
+            </Col>
+        </Row>
+    </div>;
 }
 
-export default tableFrame;
+export default TableFrame;

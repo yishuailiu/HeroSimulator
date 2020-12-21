@@ -7,6 +7,47 @@
   pointer-events: none;
 }
 
+.pageHeader{
+  height: 500px;
+  padding-top: 70px;
+  border: 1px solid black;
+}
+
+.nameButton{
+  display: inline;
+}
+.form-group label{
+  display: block;
+}
+.form-group .form-control{
+  display: inline;
+  width: 60%;
+}
+.btn-lg{
+  padding: 2.5rem 5rem;
+    font-size: 3.25rem;
+}
+.d-flex h6{
+  margin:auto;
+  width: 80%;
+}
+table{
+  width: 100%;
+  margin-top: 40px;
+}
+.tdSectionName{
+  font-weight: bold;
+  font-size: 20px;
+  background-color: aquamarine;
+}
+.logDiv{
+  height: 300px;
+  overflow: scroll;
+  border: 1px solid black;
+}
+.logDiv p{
+  margin-bottom: 5px;
+}
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
