@@ -1,7 +1,17 @@
 import { Button, Row,Col,Form} from 'react-bootstrap';
-
+import React, { useState, useEffect} from 'react';
 
 const PageHeader = (props) => {
+
+const [level, setLevel] = useState(0);
+
+// increase level each second, has bugs.
+// function levelBySecond(){
+//     setInterval(() => {
+//         setLevel(level + 1);
+//     }, 1000);
+// }
+//levelBySecond();
 return <div className="pageHeader">
     <Row>
         <Col className="d-flex justify-content-center" md={{ span: 6, offset: 3 }}>
@@ -21,7 +31,7 @@ return <div className="pageHeader">
     </Row>
     <Row  className="justify-content-center">
         <Col className='col-4 d-flex justify-content-center'>
-            <h2>Power Level: 0</h2>
+            <h2>Power Level: {level}</h2>
         </Col>        
     </Row>
     <Row className="justify-content-center">
@@ -35,7 +45,7 @@ return <div className="pageHeader">
             <h3>Village Hero</h3>
         </Col>
         <Col className=' d-flex justify-content-center'>
-            <Button variant="dark" className="btn btn-dark btn-lg">Train!</Button>
+            <Button variant="dark" className="btn btn-dark btn-lg" onClick={()=> setLevel(level + 1)}>Train!</Button>
         </Col>
         <Col className='d-flex justify-content-center align-content-around flex-wrap'>
             <h3>Body Level: Farmer</h3>
