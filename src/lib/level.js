@@ -6,6 +6,7 @@ const LevelLib = {
         name:'Villager',
         max: new BigNumber(10).pow(3),
         top:false,
+        capacity:new BigNumber(1),
         getNext: ()=>{
             return LevelLib._1;
         },
@@ -15,6 +16,7 @@ const LevelLib = {
         name:'Hero Candidate',
         max: new BigNumber(10).pow(4),
         top:false,
+        capacity:new BigNumber(2),
         getNext: ()=>{
             return LevelLib._2;
         },
@@ -24,6 +26,7 @@ const LevelLib = {
         name:'Novice Hero',
         max: new BigNumber(10).pow(5),
         top:false,
+        capacity:new BigNumber(3),
         getNext: ()=>{
             return LevelLib._3;
         },
@@ -33,6 +36,7 @@ const LevelLib = {
         name:'Town Hero',
         max: new BigNumber(10).pow(6),
         top:false,
+        capacity:new BigNumber(4),
         getNext: ()=>{
             return LevelLib._4;
         },
@@ -42,6 +46,7 @@ const LevelLib = {
         name:'City Hero',
         max: new BigNumber(10).pow(7),
         top:false,
+        capacity:new BigNumber(6),
         getNext: ()=>{
             return LevelLib._5;
         },
@@ -51,6 +56,7 @@ const LevelLib = {
         name:'Planet Hero',
         max: new BigNumber(10).pow(8),
         top:false,
+        capacity:new BigNumber(8),
         getNext: ()=>{
             return LevelLib._6;
         },
@@ -60,6 +66,7 @@ const LevelLib = {
         name:'Galaxy Hero',
         max: new BigNumber(10).pow(9),
         top:false,
+        capacity:new BigNumber(10),
         getNext: ()=>{
             return LevelLib._7;
         },
@@ -69,8 +76,19 @@ const LevelLib = {
         name:'Universe Hero',
         max: new BigNumber(10).pow(10),
         top:false,
+        capacity:new BigNumber(13),
         getNext: ()=>{
             return LevelLib._8;
+        },
+    },
+    _8 : {
+        id:'_8',
+        name:'Omniverse Hero',
+        max: new BigNumber(10).pow(12),
+        top:true,
+        capacity:new BigNumber(15),
+        getNext: ()=>{
+            return null;
         },
     },
 

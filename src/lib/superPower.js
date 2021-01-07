@@ -1,176 +1,274 @@
 import BigNumber from 'bignumber.js';
 
-var SPLib = {
-    low0_0: {
-        id: 'l0_0',
+var SPLow = {
+    //low level power
+    _0: {
+        id: '_0',
         top: false,
         rank: 'Apprentice',
         desc: 'Gain 10 PowerLevel per second.',
         require: new BigNumber(500),
         number: new BigNumber(1),
         getPrev: () => { return null },
-        getNext: () => { return SPLib.low0_1 },
+        getNext: () => { return SPLow._1 },
     },
-    low0_1: {
-        id: 'l0_1',
+    _1: {
+        id: '_1',
         top: false,
         rank: 'Journeyman',
         desc: 'Gain 30 PowerLevel per second.',
         require: new BigNumber(200),
-        getPrev: () => { return SPLib.low0_0 },
-        getNext: () => { return SPLib.low0_2 },
+        getPrev: () => { return SPLow._0 },
+        getNext: () => { return SPLow._2 },
     },
-    low0_2: {
-        id: 'l0_2',
+    _2: {
+        id: '_2',
         top: false,
         rank: 'Expert',
         desc: 'Gain 50 PowerLevel per second.',
         require: new BigNumber(10).pow(4).times(4),
-        getPrev: () => { return SPLib.low0_1 },
-        getNext: () => { return SPLib.low0_3 },
+        getPrev: () => { return SPLow._1 },
+        getNext: () => { return SPLow._3 },
     },
-    low0_3: {
-        id: 'l0_3',
+    _3: {
+        id: '_3',
         top: false,
         rank: 'Artisan',
         desc: 'Gain 200 PowerLevel per second.',
         require: new BigNumber(10).pow(5).times(7),
-        getPrev: () => { return SPLib.low0_2 },
-        getNext: () => { return SPLib.low0_4 },
+        getPrev: () => { return SPLow._2 },
+        getNext: () => { return SPLow._4 },
     },
-    low0_4: {
-        id: 'l0_4',
+    _4: {
+        id: '_4',
         top: false,
         rank: 'Master',
         desc: 'Gain 2,020 PowerLevel per second.',
         require: new BigNumber(10).pow(7).times(2),
-        getPrev: () => { return SPLib.low0_3},
-        getNext: () => { return SPLib.low0_5 },
+        getPrev: () => { return SPLow._3 },
+        getNext: () => { return SPLow._5 },
     },
-    low0_5: {
-        id: 'l0_5',
+    _5: {
+        id: '_5',
         top: false,
         rank: 'Grand Master',
         desc: 'Gain 10,080 PowerLevel per second.',
         require: new BigNumber(10).pow(9).times(3),
-        getPrev: () => { return SPLib.low0_4 },
-        getNext: () => { return SPLib.low0_6 },
+        getPrev: () => { return SPLow._4 },
+        getNext: () => { return SPLow._6 },
     },
-    low0_6: {
-        id: 'l0_6',
+    _6: {
+        id: '_6',
         top: false,
         rank: 'Zen Master',
         desc: 'Gain 3,100,003 PowerLevel per second.',
         require: new BigNumber(10).pow(11),
-        getPrev: () => { return SPLib.low0_5 },
-        getNext: () => { return SPLib.low0_7 },
+        getPrev: () => { return SPLow._5 },
+        getNext: () => { return SPLow._7 },
     },
-    low0_7: {
-        id: 'l0_7',
+    _7: {
+        id: '_7',
         top: false,
         rank: 'Creator',
         desc: 'Gain 50,090,060 PowerLevel per second.',
         require: new BigNumber(10).pow(12),
-        getPrev: () => { return SPLib.low0_6 },
-        getNext: () => { return SPLib.low0_8 },
+        getPrev: () => { return SPLow._6 },
+        getNext: () => { return SPLow._8 },
     },
-    low0_8: {
-        id: 'l0_0',
+    _8: {
+        id: '_0',
         top: false,
         rank: 'Omni',
         desc: 'Gain 109,090,090 PowerLevel per second.',
         require: new BigNumber(10).pow(16),
-        getPrev: () => { return SPLib.low0_7 },
-        getNext: () => { null },
+        getPrev: () => { return SPLow._7 },
+        getNext: () => { return null },
     },
-    mid0_0: {
-        id: 'm0_0',
+}
+
+var SPMid = {    
+    //mid level power
+    _0: {
+        id: '_0',
         top: false,
         rank: 'Apprentice',
         desc: 'Gain 10 PowerLevel per second.',
         require: new BigNumber(1000),
         number: new BigNumber(1),
         getPrev: () => { return null },
-        getNext: () => { return SPLib.mid0_1 },
+        getNext: () => { return SPMid._1 },
     },
-    mid0_1: {
-        id: 'm0_1',
+    _1: {
+        id: '_1',
         top: false,
         rank: 'Journeyman',
         desc: 'Gain 30 PowerLevel per second.',
         require: new BigNumber(5000),
-        getPrev: () => { return SPLib.mid0_0 },
-        getNext: () => { return SPLib.mid0_2 },
+        getPrev: () => { return SPMid._0 },
+        getNext: () => { return SPMid._2 },
     },
-    mid0_2: {
-        id: 'm0_2',
+    _2: {
+        id: '_2',
         top: false,
         rank: 'Expert',
         desc: 'Gain 50 PowerLevel per second.',
         require: new BigNumber(10).pow(5),
-        getPrev: () => { return SPLib.mid0_1 },
-        getNext: () => { return SPLib.mid0_3 },
+        getPrev: () => { return SPMid._1 },
+        getNext: () => { return SPMid._3 },
     },
-    mid0_3: {
-        id: 'm0_3',
+    _3: {
+        id: '_3',
         top: false,
         rank: 'Artisan',
         desc: 'Gain 100 PowerLevel per second.',
         require: new BigNumber(10).pow(6).times(3),
-        getPrev: () => { return SPLib.mid0_2 },
-        getNext: () => { return SPLib.mid0_4 },
+        getPrev: () => { return SPMid._2 },
+        getNext: () => { return SPMid._4 },
     },
-    mid0_4: {
-        id: 'm0_4',
+    _4: {
+        id: '_4',
         top: false,
         rank: 'Master',
         desc: 'Gain 1000 PowerLevel per second.',
         require: new BigNumber(10).pow(8).times(4),
-        getPrev: () => { return SPLib.mid0_3},
-        getNext: () => { return SPLib.mid0_5 },
+        getPrev: () => { return SPMid._3 },
+        getNext: () => { return SPMid._5 },
     },
-    mid0_5: {
-        id: 'm0_5',
+    _5: {
+        id: '_5',
         top: false,
         rank: 'Grand Master',
         desc: 'Gain 10,080 PowerLevel per second.',
         require: new BigNumber(10).pow(10).times(5),
-        getPrev: () => { return SPLib.mid0_4 },
-        getNext: () => { return SPLib.mid0_6 },
+        getPrev: () => { return SPMid._4 },
+        getNext: () => { return SPMid._6 },
     },
-    mid0_6: {
-        id: 'm0_6',
+    _6: {
+        id: '_6',
         top: false,
         rank: 'Zen Master',
-        desc: 'Gain 20,100,10 PowerLevel per second.',
+        desc: 'Gain 200,100 PowerLevel per second.',
         require: new BigNumber(10).pow(11),
-        getPrev: () => { return SPLib.mid0_5 },
-        getNext: () => { return SPLib.mid0_7 },
+        getPrev: () => { return SPMid._5 },
+        getNext: () => { return SPMid._7 },
     },
-    mid0_7: {
-        id: 'm0_7',
+    _7: {
+        id: '_7',
         top: false,
         rank: 'Creator',
         desc: 'Gain 3,090,060 PowerLevel per second.',
         require: new BigNumber(10).pow(13),
-        getPrev: () => { return SPLib.mid0_6 },
-        getNext: () => { return SPLib.mid0_8 },
+        getPrev: () => { return SPMid._6 },
+        getNext: () => { return SPMid._8 },
     },
-    mid0_8: {
-        id: 'm0_0',
+    _8: {
+        id: '_0',
         top: false,
         rank: 'Omni',
         desc: 'Gain 96,669,090,090 PowerLevel per second.',
         require: new BigNumber(10).pow(16),
-        getPrev: () => { return SPLib.mid0_7 },
-        getNext: () => { null },
+        getPrev: () => { return SPMid._7 },
+        getNext: () => { return null },
     },
-    
-    
-
 }
 
-const getRandomPower = (){
+var SPHigh = {    
+    //high level power
+    _0: {
+        id: '_0',
+        top: false,
+        rank: 'Apprentice',
+        desc: 'Gain 10 PowerLevel per second.',
+        require: new BigNumber(500),
+        number: new BigNumber(1),
+        getPrev: () => { return null },
+        getNext: () => { return SPMid._1 },
+    },
+    _1: {
+        id: '_1',
+        top: false,
+        rank: 'Journeyman',
+        desc: 'Gain 50 PowerLevel per second.',
+        require: new BigNumber(5000),
+        getPrev: () => { return SPMid._0 },
+        getNext: () => { return SPMid._2 },
+    },
+    _2: {
+        id: '_2',
+        top: false,
+        rank: 'Expert',
+        desc: 'Gain 300 PowerLevel per second.',
+        require: new BigNumber(10).pow(4).times(4),
+        getPrev: () => { return SPMid._1 },
+        getNext: () => { return SPMid._3 },
+    },
+    _3: {
+        id: '_3',
+        top: false,
+        rank: 'Artisan',
+        desc: 'Gain 1,000 PowerLevel per second.',
+        require: new BigNumber(10).pow(5).times(6),
+        getPrev: () => { return SPMid._2 },
+        getNext: () => { return SPMid._4 },
+    },
+    _4: {
+        id: '_4',
+        top: false,
+        rank: 'Master',
+        desc: 'Gain 7,000 PowerLevel per second.',
+        require: new BigNumber(10).pow(10).times(7),
+        getPrev: () => { return SPMid._3 },
+        getNext: () => { return SPMid._5 },
+    },
+    _5: {
+        id: '_5',
+        top: false,
+        rank: 'Grand Master',
+        desc: 'Gain 90,080 PowerLevel per second.',
+        require: new BigNumber(10).pow(8).times(2),
+        getPrev: () => { return SPMid._4 },
+        getNext: () => { return SPMid._6 },
+    },
+    _6: {
+        id: '_6',
+        top: false,
+        rank: 'Zen Master',
+        desc: 'Gain 100,100 PowerLevel per second.',
+        require: new BigNumber(10).pow(10),
+        getPrev: () => { return SPMid._5 },
+        getNext: () => { return SPMid._7 },
+    },
+    _7: {
+        id: '_7',
+        top: false,
+        rank: 'Creator',
+        desc: 'Gain 3,090,060 PowerLevel per second.',
+        require: new BigNumber(10).pow(11),
+        getPrev: () => { return SPMid._6 },
+        getNext: () => { return SPMid._8 },
+    },
+    _8: {
+        id: '_0',
+        top: false,
+        rank: 'Omni',
+        desc: 'Gain 569,090,090 PowerLevel per second.',
+        require: new BigNumber(10).pow(16),
+        getPrev: () => { return SPMid._7 },
+        getNext: () => { return null },
+    },
+
+
+
+}
+const getRandomPower = () => {
+    var rand = Math.random();
+    if(rand < 0.2){
+        return SPLow;
+    } else if (rand <0.5){
+        return SPMid;
+    } else {
+        return SPHigh;
+    }
 
 }
 
