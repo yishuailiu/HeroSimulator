@@ -185,7 +185,7 @@ const BodyLib ={
             return BodyLib._9;
         },
     },
-    _8 : {
+    _9 : {
         id:'_9',
         name:'Saitama',
         train: new BigNumber(10).pow(10),

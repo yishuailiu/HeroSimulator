@@ -2,7 +2,7 @@ import TableRow from "./tableRow"
 import {Row,Button} from 'react-bootstrap';
 
 
-const TableSection = (props) => {
+const SPTableSection = (props) => {
     const sectionName = props.sectionName;
     var trSection = <div></div>;
 
@@ -26,4 +26,4 @@ const TableSection = (props) => {
     </tbody>;
 };
 
-export default TableSection;
+export default SPTableSection;

@@ -2,18 +2,34 @@ import React, {useState, useEffect} from 'react'
 import create from 'zustand';
 import {getRandomPower} from '../lib/superPower';
 import {randomPowerName} from '../lib/abilityMaker';
+import BigNumber from 'bignumber.js';
+import {BodyLib,LevelLib} from '../lib/level';
 
-const getInitialPowerLevel = () => 0;
+const getInitialPowerLevel = () => new BigNumber(0);
 const getpowerList = () => ([]);
+const getClickPL = () => new BigNumber(1);
+const getAutoPL = () => new BigNumber(0);
+const getBody = () => {
+    return BodyLib._0;
+}
 
 export const [usePowerAppStore,store] = create((set,get) => ({
     powerLevel: getInitialPowerLevel(),
     powerList: getpowerList(),
-    clickPL: 1,
-    autoPL:0, 
+    body:getBody(),
+    clickPL: getClickPL(),
+    autoPL: getAutoPL(), 
     actions:{
-        changePL(amount = 1){
-            set(state =>({ powerLevel: state.powerLevel + amount }));
+        changePL(amount = new BigNumber(1)){
+            console.log(getInitialPowerLevel().minus(1));
+            set(state =>({ powerLevel: state.powerLevel.minus(1)}));
+        },
+        upgradeBody(){
+            if(!getBody.top){
+                // set(state => ({powerLevel: state.powerLevel.minus(state.body.require)}));
+                // set(state => ({body: state.body.getNext()}));
+                set(state => ({clickPL: state.clickPL = state.body.train}));                
+            }            
         },
         getNewPower(){
             let newPowerName = randomPowerName();

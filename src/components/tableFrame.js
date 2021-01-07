@@ -1,4 +1,5 @@
-import TableSection from './tableSection';
+import BodyTableSection from './bodyTableSection';
+import SPTableSection from './SPTableSection';
 import {Row,Col} from 'react-bootstrap';
 
 const TableFrame = (props) => {
@@ -15,8 +16,8 @@ const TableFrame = (props) => {
                     </tr>
 
                 </thead>
-                <TableSection sectionName="Physical Body"></TableSection>
-                <TableSection sectionName="Super Powers"></TableSection>
+                <BodyTableSection sectionName="Physical Body"></BodyTableSection>
+                <SPTableSection sectionName="Super Powers"></SPTableSection>
             </table>
             </Col>
         </Row>

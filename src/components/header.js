@@ -3,6 +3,7 @@ import React, { useState, useEffect, useCallback} from 'react';
 import {usePowerAppStore} from '../store/powerAppStore';
 import {useInterval} from 'react-use-timeout';
 
+
 const PageHeader = (props) => {
 
 const actions = usePowerAppStore(s => s.actions);
@@ -10,9 +11,11 @@ const powerLevel = usePowerAppStore(s => s.powerLevel);
 const incAmount = usePowerAppStore(s => s.clickPL);
 const incPL = useCallback(() => actions.changePL(incAmount),[actions,incAmount]);
 const timeout = useInterval(incPL,1000);
+const bodyDetail = usePowerAppStore(s => s.body);
 useEffect(() => {
     timeout.start();
 },[]);
+
 
 //const [level, setLevel] = useState(0);
 
@@ -54,13 +57,14 @@ return <div className="pageHeader">
     <Row>
         <Col className='d-flex justify-content-center align-content-around flex-wrap'>
             <h3>Village Hero</h3>
+            <h5>Super Power Capacity: 1</h5>    
         </Col>
         <Col className=' d-flex justify-content-center'>
             <Button variant="dark" className="btn btn-dark btn-lg" onClick={()=> actions.changePL(incAmount)}>Train!</Button>
         </Col>
         <Col className='d-flex justify-content-center align-content-around flex-wrap'>
-            <h3>Body Level: Farmer</h3>
-            <h5>Super Power Capacity: 1</h5>            
+            <h3>Body Level: {bodyDetail.name}</h3>
+            <h5>Training Efficiency: {bodyDetail.train}</h5>           
         </Col>
     </Row>
     
