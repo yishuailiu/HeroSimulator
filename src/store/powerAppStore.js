@@ -1,10 +1,10 @@
-import React, {useState, useEffect,useReducer} from 'react'
+import React, { useState, useEffect, useReducer } from 'react'
 import create from 'zustand';
-import {getRandomPower} from '../lib/superPower';
-import {randomPowerName} from '../lib/abilityMaker';
+import { getRandomPower } from '../lib/superPower';
+import { randomPowerName } from '../lib/abilityMaker';
 import BigNumber from 'bignumber.js';
-import {BodyLib,LevelLib} from '../lib/level';
-import {INC_PL_Train,INC_PL_Auto} from './powerActions';
+import { BodyLib, LevelLib } from '../lib/level';
+import { INC_PL_Train, INC_PL_Auto, UPG_BODY } from './powerActions';
 // const getInitialPowerLevel = () => new BigNumber(0);
 // const getpowerList = () => ([]);
 // const getClickPL = () => new BigNumber(1);
@@ -51,17 +51,29 @@ import {INC_PL_Train,INC_PL_Auto} from './powerActions';
 
 const PowerAppContext = React.createContext();
 
-const powerReducer = (state,action) => {
-    switch(action.type) {
+const powerReducer = (state, action) => {
+    switch (action.type) {
         case INC_PL_Train:
-            return{ 
-                ...state,                            
-                powerLevelStore: state.powerLevelStore + state.powerLevelPerTrain,
+            
+            return {
+                ...state,
+                powerLevelStore: state.powerLevelStore + state.bodyRank.train,
             };
         case INC_PL_Auto:
-            return{
+            return {
                 ...state,
                 powerLevelStore: state.powerLevelStore + state.powerLevelPerSecond,
+            }
+        case UPG_BODY:
+            if ((!state.bodyRank.top) && (state.powerLevelStore>=state.bodyRank.require)) {
+                return {
+                    ...state,
+                    powerLevelStore: state.powerLevelStore - state.bodyRank.require,
+                    bodyRank: state.bodyRank.getNext(),
+                    powerLevelPerTrain: state.bodyRank.train,
+                }
+            } else{
+                return state;
             }
         default:
             return state;
@@ -69,20 +81,19 @@ const powerReducer = (state,action) => {
 };
 
 const PowerAppStore = (props) => {
-    
+
     const initiaState = {
         powerLevelStore: 0,
-        heroRank:LevelLib._0,
-        bodyRank:BodyLib._0,
-        powerLevelPerTrain: 1,
-        powerLevelPerSecond: 1,
-        powerList : [],
-        playerName:'player',        
-        counter:0,
-    
+        heroRank: LevelLib._0,
+        bodyRank: BodyLib._0,        
+        powerLevelPerSecond: 0,
+        powerList: [],
+        playerName: 'player',
+        counter: 0,
+
     };
 
-    const [state,dispatch] = useReducer(powerReducer,initiaState);
+    const [state, dispatch] = useReducer(powerReducer, initiaState);
 
     // const powerStore = {
     //     powerLevelStore :state.powerLevelStore,
@@ -96,28 +107,40 @@ const PowerAppStore = (props) => {
     // };
 
     //increase PL by Train
-    const incPowerLevelTrain = () =>{
+    const incPowerLevelTrain = () => {
         dispatch({
-            type:INC_PL_Train
+            type: INC_PL_Train
         })
     };
 
     //increase PL by Auto
-    const incPowerLevelAuto = () =>{
+    const incPowerLevelAuto = () => {
         dispatch({
-            type:INC_PL_Auto
+            type: INC_PL_Auto
         })
-    } 
+    };
 
-    return <PowerAppContext.Provider value = {{powerLevelStore: state.powerLevelStore,
-        powerLevelPerTrain: state.powerLevelPerTrain,
-        powerLevelPerSecond:state.incPowerLevelAuto,
+    //purchase body upgrade
+    const upgBody = () => {
+        
+        dispatch({
+            type: UPG_BODY
+        });
+    };
+
+    return <PowerAppContext.Provider value={{
+        powerLevelStore: state.powerLevelStore,
+        powerLevelPerTrain: state.bodyRank.train,
+        powerLevelPerSecond: state.powerLevelPerSecond,
         bodyname: state.bodyRank.name,
         trainEfficiency: state.bodyRank.train,
+        bodyRequire: state.bodyRank.require,
         incPowerLevelTrain,
-        incPowerLevelAuto}}>{props.children}</PowerAppContext.Provider>
+        incPowerLevelAuto,
+        upgBody
+    }}>{props.children}</PowerAppContext.Provider>
 }
 
 
 export default PowerAppStore;
-export {PowerAppContext};
+export { PowerAppContext };
