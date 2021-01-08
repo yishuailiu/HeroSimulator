@@ -1,17 +1,19 @@
 import { Button, Row,Col,Form} from 'react-bootstrap';
-import React, { useState, useEffect, useCallback} from 'react';
+import React, { useState, useEffect, useCallback,useContext} from 'react';
 import {usePowerAppStore} from '../store/powerAppStore';
 import {useInterval} from 'react-use-timeout';
-
+import {PowerAppContext} from '../store/powerAppStore';
 
 const PageHeader = (props) => {
 
-const actions = usePowerAppStore(s => s.actions);
-const powerLevel = usePowerAppStore(s => s.powerLevel);
-const incAmount = usePowerAppStore(s => s.clickPL);
-const incPL = useCallback(() => actions.changePL(incAmount),[actions,incAmount]);
+const {powerLevelStore,incPowerLevelTrain,incPowerLevelAuto,bodyname,trainEfficiency} = useContext(PowerAppContext);
+
+// const actions = usePowerAppStore(s => s.actions);
+// const powerLevel = usePowerAppStore(s => s.powerLevel);
+// const incAmount = usePowerAppStore(s => s.clickPL);
+const incPL = useCallback(() => incPowerLevelAuto,[]);
 const timeout = useInterval(incPL,1000);
-const bodyDetail = usePowerAppStore(s => s.body);
+// const bodyDetail = usePowerAppStore(s => s.body);
 useEffect(() => {
     timeout.start();
 },[]);
@@ -45,7 +47,7 @@ return <div className="pageHeader">
     </Row>
     <Row  className="justify-content-center">
         <Col className='col-4 d-flex justify-content-center'>
-            <h2>Power Level: {powerLevel}</h2>
+            <h2>Power Level: {powerLevelStore}</h2>
         </Col>        
     </Row>
     <Row className="justify-content-center">
@@ -60,11 +62,11 @@ return <div className="pageHeader">
             <h5>Super Power Capacity: 1</h5>    
         </Col>
         <Col className=' d-flex justify-content-center'>
-            <Button variant="dark" className="btn btn-dark btn-lg" onClick={()=> actions.changePL(incAmount)}>Train!</Button>
+            <Button variant="dark" className="btn btn-dark btn-lg" onClick={()=> incPowerLevelTrain()}>Train!</Button>
         </Col>
         <Col className='d-flex justify-content-center align-content-around flex-wrap'>
-            <h3>Body Level: {bodyDetail.name}</h3>
-            <h5>Training Efficiency: {bodyDetail.train}</h5>           
+            <h3>Body Level: </h3>
+            <h5>Training Efficiency: </h5>           
         </Col>
     </Row>
     

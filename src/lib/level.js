@@ -4,9 +4,9 @@ const LevelLib = {
     _0 : {
         id:'_0',
         name:'Villager',
-        max: new BigNumber(10).pow(3),
+        max: 1000,
         top:false,
-        capacity:new BigNumber(1),
+        capacity:1,
         getNext: ()=>{
             return LevelLib._1;
         },
@@ -14,9 +14,9 @@ const LevelLib = {
     _1 : {
         id:'_1',
         name:'Hero Candidate',
-        max: new BigNumber(10).pow(4),
+        max: 10000,
         top:false,
-        capacity:new BigNumber(2),
+        capacity:2,
         getNext: ()=>{
             return LevelLib._2;
         },
@@ -24,9 +24,9 @@ const LevelLib = {
     _2 : {
         id:'_2',
         name:'Novice Hero',
-        max: new BigNumber(10).pow(5),
+        max: 100000,
         top:false,
-        capacity:new BigNumber(3),
+        capacity:3,
         getNext: ()=>{
             return LevelLib._3;
         },
@@ -34,9 +34,9 @@ const LevelLib = {
     _3 : {
         id:'_3',
         name:'Town Hero',
-        max: new BigNumber(10).pow(6),
+        max: 1000000,
         top:false,
-        capacity:new BigNumber(4),
+        capacity:4,
         getNext: ()=>{
             return LevelLib._4;
         },
@@ -44,9 +44,9 @@ const LevelLib = {
     _4 : {
         id:'_4',
         name:'City Hero',
-        max: new BigNumber(10).pow(7),
+        max: 10000000,
         top:false,
-        capacity:new BigNumber(6),
+        capacity:6,
         getNext: ()=>{
             return LevelLib._5;
         },
@@ -54,9 +54,9 @@ const LevelLib = {
     _5 : {
         id:'_5',
         name:'Planet Hero',
-        max: new BigNumber(10).pow(8),
+        max: 100000000,
         top:false,
-        capacity:new BigNumber(8),
+        capacity:8,
         getNext: ()=>{
             return LevelLib._6;
         },
@@ -64,9 +64,9 @@ const LevelLib = {
     _6 : {
         id:'_6',
         name:'Galaxy Hero',
-        max: new BigNumber(10).pow(9),
+        max: 1000000000,
         top:false,
-        capacity:new BigNumber(10),
+        capacity:10,
         getNext: ()=>{
             return LevelLib._7;
         },
@@ -74,9 +74,9 @@ const LevelLib = {
     _7 : {
         id:'_7',
         name:'Universe Hero',
-        max: new BigNumber(10).pow(10),
+        max: 10000000000,
         top:false,
-        capacity:new BigNumber(13),
+        capacity:13,
         getNext: ()=>{
             return LevelLib._8;
         },
@@ -84,9 +84,9 @@ const LevelLib = {
     _8 : {
         id:'_8',
         name:'Omniverse Hero',
-        max: new BigNumber(10).pow(12),
+        max: 1000000000000,
         top:true,
-        capacity:new BigNumber(15),
+        capacity:15,
         getNext: ()=>{
             return null;
         },
@@ -98,8 +98,8 @@ const BodyLib ={
     _0 : {
         id:'_0',
         name:'Farmer',
-        train: new BigNumber(1),
-        require: new BigNumber(10),
+        train: 1,
+        require:10,
         top:false,
         getNext: ()=>{
             return BodyLib._1;
@@ -108,8 +108,8 @@ const BodyLib ={
     _1 : {
         id:'_1',
         name:'Athlete',
-        train: new BigNumber(5),
-        require: new BigNumber(400),
+        train: 5,
+        require: 400,
         top:false,
         getNext: ()=>{
             return BodyLib._2;
@@ -118,8 +118,8 @@ const BodyLib ={
     _2 : {
         id:'_2',
         name:'Body Builder',
-        train: new BigNumber(10),
-        require: new BigNumber(2000),
+        train: 10,
+        require: 2000,
         top:false,
         getNext: ()=>{
             return BodyLib._3;
@@ -128,8 +128,8 @@ const BodyLib ={
     _3 : {
         id:'_3',
         name:'Elite Soldier',
-        train: new BigNumber(50),
-        require: new BigNumber(10).pow(4),
+        train: 50,
+        require: 4000,
         top:false,
         getNext: ()=>{
             return BodyLib._4;
@@ -138,8 +138,8 @@ const BodyLib ={
     _4 : {
         id:'_4',
         name:'Cyborg',
-        train: new BigNumber(200),
-        require: new BigNumber(10).pow(4).times(8),
+        train: 200,
+        require: 32000,
         top:false,
         getNext: ()=>{
             return BodyLib._5;
@@ -148,8 +148,8 @@ const BodyLib ={
     _5 : {
         id:'_5',
         name:'Dragon Blood',
-        train: new BigNumber(1000),
-        require: new BigNumber(10).pow(6),
+        train: 1000,
+        require: 6000000,
         top:false,
         getNext: ()=>{
             return BodyLib._6;
@@ -158,8 +158,8 @@ const BodyLib ={
     _6 : {
         id:'_6',
         name:'Asgardian',
-        train: new BigNumber(10).pow(4),
-        require: new BigNumber(10).pow(7),
+        train:4000,
+        require: 10000000,
         top:false,
         getNext: ()=>{
             return BodyLib._7;
@@ -168,8 +168,8 @@ const BodyLib ={
     _7 : {
         id:'_7',
         name:'Hulk',
-        train: new BigNumber(10).pow(5),
-        require: new BigNumber(10).pow(9),
+        train: 100000,
+        require: 1000000000,
         top:false,
         getNext: ()=>{
             return BodyLib._8;
@@ -178,23 +178,13 @@ const BodyLib ={
     _8 : {
         id:'_8',
         name:'Saiyan',
-        train: new BigNumber(10).pow(7),
-        require: new BigNumber(10).pow(12),
-        top:false,
-        getNext: ()=>{
-            return BodyLib._9;
-        },
-    },
-    _9 : {
-        id:'_9',
-        name:'Saitama',
-        train: new BigNumber(10).pow(10),
-        require: new BigNumber(10).pow(16),
+        train: 10000000,
+        require: 1000000000000,
         top:true,
         getNext: ()=>{
             return null;
         },
-    },
+    }
 }
 
 

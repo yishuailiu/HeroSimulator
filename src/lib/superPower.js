@@ -7,8 +7,8 @@ var SPLow = {
         top: false,
         rank: 'Apprentice',
         desc: 'Gain 10 PowerLevel per second.',
-        require: new BigNumber(500),
-        number: new BigNumber(1),
+        require: 500,
+        number: 10,
         getPrev: () => { return null },
         getNext: () => { return SPLow._1 },
     },
@@ -17,7 +17,8 @@ var SPLow = {
         top: false,
         rank: 'Journeyman',
         desc: 'Gain 30 PowerLevel per second.',
-        require: new BigNumber(200),
+        require: 2000,
+        number: 30,
         getPrev: () => { return SPLow._0 },
         getNext: () => { return SPLow._2 },
     },
@@ -26,7 +27,8 @@ var SPLow = {
         top: false,
         rank: 'Expert',
         desc: 'Gain 50 PowerLevel per second.',
-        require: new BigNumber(10).pow(4).times(4),
+        require: 16000,
+        number:50,
         getPrev: () => { return SPLow._1 },
         getNext: () => { return SPLow._3 },
     },
@@ -35,7 +37,7 @@ var SPLow = {
         top: false,
         rank: 'Artisan',
         desc: 'Gain 200 PowerLevel per second.',
-        require: new BigNumber(10).pow(5).times(7),
+        require: 3500000,
         getPrev: () => { return SPLow._2 },
         getNext: () => { return SPLow._4 },
     },
@@ -44,7 +46,8 @@ var SPLow = {
         top: false,
         rank: 'Master',
         desc: 'Gain 2,020 PowerLevel per second.',
-        require: new BigNumber(10).pow(7).times(2),
+        require: 140000000,
+        number:2020,
         getPrev: () => { return SPLow._3 },
         getNext: () => { return SPLow._5 },
     },
@@ -53,7 +56,8 @@ var SPLow = {
         top: false,
         rank: 'Grand Master',
         desc: 'Gain 10,080 PowerLevel per second.',
-        require: new BigNumber(10).pow(9).times(3),
+        require: 27000000000,
+        number: 10080,
         getPrev: () => { return SPLow._4 },
         getNext: () => { return SPLow._6 },
     },
@@ -62,28 +66,22 @@ var SPLow = {
         top: false,
         rank: 'Zen Master',
         desc: 'Gain 3,100,003 PowerLevel per second.',
-        require: new BigNumber(10).pow(11),
+        require: 100000000000,
+        number: 3100003,
         getPrev: () => { return SPLow._5 },
         getNext: () => { return SPLow._7 },
     },
     _7: {
         id: '_7',
-        top: false,
+        top: true,
         rank: 'Creator',
         desc: 'Gain 50,090,060 PowerLevel per second.',
-        require: new BigNumber(10).pow(12),
+        require: 1000000000000,
+        number: 50090606,
         getPrev: () => { return SPLow._6 },
-        getNext: () => { return SPLow._8 },
-    },
-    _8: {
-        id: '_0',
-        top: false,
-        rank: 'Omni',
-        desc: 'Gain 109,090,090 PowerLevel per second.',
-        require: new BigNumber(10).pow(16),
-        getPrev: () => { return SPLow._7 },
         getNext: () => { return null },
     },
+    
 }
 
 var SPMid = {    
@@ -261,14 +259,15 @@ var SPHigh = {
 
 }
 const getRandomPower = () => {
+    return SPLow;
     var rand = Math.random();
-    if(rand < 0.2){
-        return SPLow;
-    } else if (rand <0.5){
-        return SPMid;
-    } else {
-        return SPHigh;
-    }
+    // if(rand < 0.2){
+    //     return SPLow;
+    // } else if (rand <0.5){
+    //     return SPMid;
+    // } else {
+    //     return SPHigh;
+    // }
 
 }
 
