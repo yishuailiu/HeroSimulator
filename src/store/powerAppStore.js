@@ -5,49 +5,7 @@ import { randomPowerName } from '../lib/abilityMaker';
 import BigNumber from 'bignumber.js';
 import { BodyLib, LevelLib } from '../lib/level';
 import { INC_PL_Train, INC_PL_Auto, UPG_BODY } from './powerActions';
-// const getInitialPowerLevel = () => new BigNumber(0);
-// const getpowerList = () => ([]);
-// const getClickPL = () => new BigNumber(1);
-// const getAutoPL = () => new BigNumber(0);
-// const getBody = () => {
-//     return BodyLib._0;
-// }
 
-// export const [usePowerAppStore,store] = create((set,get) => ({
-//     powerLevel: getInitialPowerLevel(),
-//     powerList: getpowerList(),
-//     body:getBody(),
-//     clickPL: getClickPL(),
-//     autoPL: getAutoPL(), 
-//     actions:{
-//         changePL(amount = new BigNumber(1)){
-//             console.log(getInitialPowerLevel().minus(1));
-//             set(state =>({ powerLevel: state.powerLevel.minus(1)}));
-//         },
-//         upgradeBody(){
-//             if(!getBody.top){
-//                 // set(state => ({powerLevel: state.powerLevel.minus(state.body.require)}));
-//                 // set(state => ({body: state.body.getNext()}));
-//                 set(state => ({clickPL: state.clickPL = state.body.train}));                
-//             }            
-//         },
-//         getNewPower(){
-//             let newPowerName = randomPowerName();
-//             let newPowerDetail = getRandomPower();
-//             set(state => ({powerList: state.powerList.push({
-//                 name:newPowerName,
-//                 object:newPowerDetail,
-//             })}));
-//         }
-//     }
-// }));
-
-// store.setState(JSON.parse(window.localStorage.getItem("state")));
-// store.subscribe(state => {
-//     const stateCopy = {...state};
-//     delete stateCopy["actions"];
-//     window.localStorage.setItem("state",JSON.stringify(stateCopy));
-// });
 
 const PowerAppContext = React.createContext();
 
