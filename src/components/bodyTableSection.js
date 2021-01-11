@@ -1,16 +1,14 @@
 import TableRow from "./tableRow"
 import { Row, Button } from 'react-bootstrap';
-
-import { usePowerAppStore } from '../store/powerAppStore';
-import { useCallback } from "react";
+import {PowerAppContext} from '../store/powerAppStore';
+// import { usePowerAppStore } from '../store/powerAppStore';
+import React,{ useCallback,useContext } from "react";
 import { act } from "react-dom/test-utils";
 
 const BodyTableSection = (props) => {
     const sectionName = props.sectionName;
-    const actions = usePowerAppStore(s => s.actions);
-    const bodyDetail = usePowerAppStore(s => s.body);
-    const powerLevel = usePowerAppStore(s => s.powerLevel);
-    const bodyLevelUp = actions.upgradeBody();
+    const {powerLevelStore,bodyRequire,bodyname,trainEfficiency,upgBody} = useContext(PowerAppContext);
+
 
 
     
@@ -22,11 +20,11 @@ const BodyTableSection = (props) => {
         </tr>
 
         <tr>
-            <th scope="row">{bodyDetail.name}</th>
-            <td>{bodyDetail.train}</td>
-            <td>{bodyDetail.require}</td>
+            <th scope="row">{bodyname}</th> 
+            <td>Gain {trainEfficiency} PL for each training.</td>
+            <td>{bodyRequire} PL</td>
             <td>
-                <Button disabled={useCallback(() => powerLevel > bodyDetail.require ? "true" : "false"),[powerLevel]} className="btn btn-outline-secondary" onClick={bodyLevelUp}>Level Up!</Button>
+                <Button variant="secondary" disabled={false} className="btn" onClick={() => upgBody()}>Level Up!</Button>
             </td>
         </tr>;
 
