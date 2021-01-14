@@ -4,7 +4,7 @@ import { getRandomPower } from '../lib/superPower';
 import { randomPowerName } from '../lib/abilityMaker';
 import BigNumber from 'bignumber.js';
 import { BodyLib, LevelLib } from '../lib/level';
-import { INC_PL_Train, INC_PL_Auto, UPG_BODY } from './powerActions';
+import { INC_PL_Train, INC_PL_Auto, UPG_BODY,UPG_RANK,GET_NEW_POWER,UPG_POWER } from './powerActions';
 
 
 const PowerAppContext = React.createContext();
@@ -33,6 +33,21 @@ const powerReducer = (state, action) => {
             } else{
                 return state;
             }
+        case UPG_RANK:
+            if ((!state.heroRank.top) && (state.powerLevelStore>=state.heroRank.max)) {
+                return {
+                    ...state, 
+                    powerLevelStore: state.powerLevelStore - state.heroRank.max,
+                    heroRank: state.heroRank.getNext(),
+                    powerLevelPerTrain: state.heroRank.train,
+                }
+            } else{
+                return state;
+            }
+        case GET_NEW_POWER:
+            return null;
+        case UPG_POWER:
+            return null;
         default:
             return state;
     }
@@ -85,17 +100,43 @@ const PowerAppStore = (props) => {
             type: UPG_BODY
         });
     };
+    //handle rank upgrade
+    const upgRank =() =>{
+        dispatch({
+            type:UPG_RANK
+        });
+    };
+    //purchase new power
+    const getNewPower = () =>{
+        dispatch({
+            type:GET_NEW_POWER
+        });
+    };
+
+    //upgrade power
+    const upgPower = (powerName) =>{
+        dispatch({
+            type:UPG_POWER,
+            payload: powerName,
+        })
+    };
 
     return <PowerAppContext.Provider value={{
         powerLevelStore: state.powerLevelStore,
         powerLevelPerTrain: state.bodyRank.train,
         powerLevelPerSecond: state.powerLevelPerSecond,
-        bodyname: state.bodyRank.name,
+        bodyName: state.bodyRank.name,
         trainEfficiency: state.bodyRank.train,
         bodyRequire: state.bodyRank.require,
+        rankName:state.heroRank.name,
+        rankRequire: state.heroRank.max,
+        powerCapacity: state.heroRank.capacity,
         incPowerLevelTrain,
         incPowerLevelAuto,
-        upgBody
+        upgBody,
+        upgRank,
+        getNewPower,
+        upgPower
     }}>{props.children}</PowerAppContext.Provider>
 }
 

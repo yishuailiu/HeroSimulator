@@ -7,7 +7,7 @@ import { act } from "react-dom/test-utils";
 
 const BodyTableSection = (props) => {
     const sectionName = props.sectionName;
-    const {powerLevelStore,bodyRequire,bodyname,trainEfficiency,upgBody} = useContext(PowerAppContext);
+    const {powerLevelStore,bodyRequire,bodyName,trainEfficiency,upgBody} = useContext(PowerAppContext);
 
 
 
@@ -20,7 +20,7 @@ const BodyTableSection = (props) => {
         </tr>
 
         <tr>
-            <th scope="row">{bodyname}</th> 
+            <th scope="row">{bodyName}</th>            
             <td>Gain {trainEfficiency} PL for each training.</td>
             <td>{bodyRequire} PL</td>
             <td>

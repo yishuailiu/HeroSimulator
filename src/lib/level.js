@@ -98,7 +98,7 @@ const BodyLib ={
     _0 : {
         id:'_0',
         name:'Farmer',
-        train: 1,
+        train: 100,
         require:10,
         top:false,
         getNext: ()=>{
