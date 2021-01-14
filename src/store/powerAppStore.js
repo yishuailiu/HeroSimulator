@@ -1,8 +1,6 @@
 import React, { useState, useEffect, useReducer } from 'react'
-import create from 'zustand';
 import { getRandomPower } from '../lib/superPower';
 import { randomPowerName } from '../lib/abilityMaker';
-import BigNumber from 'bignumber.js';
 import { BodyLib, LevelLib } from '../lib/level';
 import { INC_PL_Train, INC_PL_Auto, UPG_BODY,UPG_RANK,GET_NEW_POWER,UPG_POWER } from './powerActions';
 
@@ -45,13 +43,28 @@ const powerReducer = (state, action) => {
                 return state;
             }
         case GET_NEW_POWER:
-            return null;
+           if((state.powerList.length<state.heroRank.capacity) && (state.powerLevelStore>(state.heroRank.max/2))){
+            let newPower = ({
+                name: randomPowerName(),
+                object:getRandomPower()
+            });   
+            return{
+                   ...state,
+                   powerLevelStore: state.powerLevelStore-state.powerLevelStore/2,
+                   powerList:state.powerList.push(newPower),
+                   powerLevelPerSecond:state.powerLevelPerSecond+newPower.object.number
+            };
+           }else{
+               return state;
+           }
         case UPG_POWER:
             return null;
         default:
             return state;
     }
 };
+
+
 
 const PowerAppStore = (props) => {
 
