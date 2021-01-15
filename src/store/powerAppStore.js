@@ -21,12 +21,12 @@ const powerReducer = (state, action) => {
                 powerLevelStore: state.powerLevelStore + state.powerLevelPerSecond,
             }
         case UPG_BODY:
-            if ((!state.bodyRank.top) && (state.powerLevelStore >= state.bodyRank.require)) {
+            if ((!state.bodyRank.top) && (state.powerLevelStore >= state.bodyRank.require)) {                
                 return {
                     ...state,
                     powerLevelStore: state.powerLevelStore - state.bodyRank.require,
                     bodyRank: state.bodyRank.getNext(),
-                    powerLevelPerTrain: state.bodyRank.train,
+                    powerLevelPerTrain: state.bodyRank.train,                    
                 }
             } else {
                 return state;
@@ -61,26 +61,33 @@ const powerReducer = (state, action) => {
                 return state;
             }
         case UPG_POWER:
-            if (state.powerLevelStore >= state.powerList[action.payload].object.require) {
-                const newList = [...state.powerList];
-                const currentNumber = newList[action.payload].object.number;
-                newList[action.payload].object = newList[action.payload].object.getNext();
-                const newNumber = newList[action.payload].object.number;                
-                return {                                       
-                    ...state,                                        
-                    powerLevelStore: state.powerLevelStore - state.powerList[action.payload].object.require,
-                    powerLevelPerSecond: state.powerLevelPerSecond +10,
-                    powerList: newList, 
+            if (state.powerLevelStore >= state.powerList[action.index].object.require) {                
+                let newObject = state.powerList[action.index].object.getNext();         
+                return {                     
+                    ...state,                     
+                    powerLevelStore:state.powerLevelStore - state.powerList[action.index].object.require,
+                    powerList: state.powerList.map(powerDetails => powerDetails === action.payload ? {
+                        ...powerDetails,
+                        object: newObject
+                    }: powerDetails)
                 }
             } else {
                 return state;
             }
-        case UPG_PL_AUTO:
-            const newPLAUTO = 0;
+        case UPG_PL_AUTO:             
+            let newPLAUTO = 0;  
+            for (const powerDetail of state.powerList) { 
+                newPLAUTO += powerDetail.object.number;                
+            }            
+            return  {
+                ...state,
+                powerLevelPerSecond: newPLAUTO,
+            };
+            
 
         default:
             return state;
-    }
+    } 
 };
 
 
@@ -146,17 +153,19 @@ const PowerAppStore = (props) => {
     };
 
     //upgrade power
-    const upgPower = (powerIndex) => {
+    const upgPower = (powerIndex,detail) => {
         dispatch({
             type: UPG_POWER,
-            payload: powerIndex,
+            payload: detail,
+            index: powerIndex
         })
     };
 
     //upgrade power per second
-    const upgPLPerSecond = () =>{
+    const upgPLPerSecond = (prevRequire) =>{
         dispatch({
             type:UPG_PL_AUTO,
+            payload:prevRequire
         })
     }
 
