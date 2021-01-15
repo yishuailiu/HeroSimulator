@@ -6,7 +6,7 @@ const LevelLib = {
         name:'Villager',
         max: 1000,
         top:false,
-        capacity:10,
+        capacity:1,
         getNext: ()=>{
             return LevelLib._1;
         },
@@ -98,7 +98,7 @@ const BodyLib ={
     _0 : {
         id:'_0',
         name:'Farmer',
-        train: 100,
+        train: 1,
         require:10,
         top:false,
         getNext: ()=>{
