@@ -6,7 +6,7 @@ const LevelLib = {
         name:'Villager',
         max: 1000,
         top:false,
-        capacity:1,
+        capacity:10,
         getNext: ()=>{
             return LevelLib._1;
         },

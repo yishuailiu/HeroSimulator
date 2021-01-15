@@ -1,29 +1,50 @@
 import TableRow from "./tableRow"
-import {Row,Button} from 'react-bootstrap';
-
-
+import { Row, Button } from 'react-bootstrap';
+import { PowerAppContext } from '../store/powerAppStore';
+import React, { useState, useEffect, useCallback, useContext } from 'react';
 const SPTableSection = (props) => {
     const sectionName = props.sectionName;
-    var trSection = <div></div>;
 
-    if(sectionName == 'Super Powers'){
-        trSection = <tr className='trSection '>            
-        <td className='tdSectionName' scope='col'>{sectionName}</td>
-        <td scope='col'><Button variant="secondary">Get New Power</Button></td>
-        <td scope='col' colspan="2" >This will cost half of current capacity</td>        
-    </tr>;
-    } else{
-        trSection = <tr className='trSection '>            
-            <td className='tdSectionName' scope='col'>{sectionName}</td>
-        </tr>;
+
+    const { getNewPower,
+        powerCapacity,
+        powerLevelPerSecond,
+        rankRequire,
+        powerList,
+        upgPower
+    } = useContext(PowerAppContext);
+
+
+    useEffect(() => {
+        renderTableRows();        
+    }, [powerList]);
+
+    const renderTableRows = ()=>{
+        if (powerList) {
+            return powerList.map((powerDetail,index) =>{
+                const {name,object} = powerDetail;
+                return <tr>
+                <th scope="row">{name}</th>
+                <td>Gain {object.number}PL per second</td>
+                <td>{object.require}PL to next Level</td>
+                <td>
+                    <Button className="btn btn-outline-secondary" onClick={()=>upgPower(index)}>Level Up!</Button>
+                </td>
+            </tr>;
+            })
+        }
     }
 
-    return <tbody>        
-        {trSection}
 
-        <TableRow rowName="Farmer Body" rowEffect="Gain 1 PL for each Training" rowRequire="10 PL"></TableRow>
+    return <tbody>
+        <tr className='trSection '>
+            <td className='tdSectionName' scope='col'>{sectionName}</td>
+            <td scope='col'><Button variant="secondary" onClick={() => getNewPower()}>Get New Power</Button></td>
+            <td scope='col' colspan="2" >This will cost {rankRequire / 2} PL</td>
+        </tr>       
+        {renderTableRows()}
 
-    </tbody>;
+    </tbody>
 };
 
 export default SPTableSection;

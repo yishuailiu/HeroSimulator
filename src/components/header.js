@@ -15,11 +15,12 @@ const {powerLevelStore,
     rankRequire,
     powerCapacity,
     trainEfficiency,
-    upgRank
+    upgRank,
+    powerList
 } = useContext(PowerAppContext);
 
 //handle increase per second
-const incPLPerSecond = useCallback(() => incPowerLevelAuto,[powerLevelPerSecond]);
+const incPLPerSecond = useCallback(() => incPowerLevelAuto(),[powerLevelPerSecond]);
 const timeout = useInterval(incPLPerSecond,1000);
 useEffect(() => {
     timeout.start();
@@ -28,7 +29,8 @@ useEffect(() => {
 useEffect(() => {
     if(powerLevelStore>=rankRequire){
         upgRank();
-    }
+    };
+    
 },[powerLevelStore]);
 
 
@@ -57,7 +59,7 @@ return <div className="pageHeader">
     <Row className="justify-content-center">
         <Col className='col-4 d-flex flex-column align justify-content-center'>
                         
-            <h6>Increased by 0 every second</h6>
+            <h6>Increased by {powerLevelPerSecond} every second</h6>
         </Col>
     </Row>
     <Row>

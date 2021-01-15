@@ -4,3 +4,4 @@ export const UPG_BODY = 'UPG_BODY';
 export const UPG_RANK = 'UPG_RANK';
 export const GET_NEW_POWER = 'GET_NEW_POWER';
 export const UPG_POWER = 'UPG_POWER';
+export const UPG_PL_AUTO ='UPG_PL_Auto';

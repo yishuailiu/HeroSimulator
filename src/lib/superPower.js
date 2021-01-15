@@ -259,7 +259,7 @@ var SPHigh = {
 
 }
 const getRandomPower = () => {
-    return SPLow;
+    return SPLow._0;
     var rand = Math.random();
     // if(rand < 0.2){
     //     return SPLow;

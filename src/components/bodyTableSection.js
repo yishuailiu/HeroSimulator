@@ -26,9 +26,9 @@ const BodyTableSection = (props) => {
             <td>
                 <Button variant="secondary" disabled={false} className="btn" onClick={() => upgBody()}>Level Up!</Button>
             </td>
-        </tr>;
+        </tr>
 
-    </tbody>;
+    </tbody>
 };
 
 export default BodyTableSection;
