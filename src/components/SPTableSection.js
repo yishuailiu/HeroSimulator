@@ -11,7 +11,8 @@ const SPTableSection = (props) => {
         powerLevelPerSecond,
         rankRequire,
         powerList,
-        upgPower
+        upgPower,
+        upgPLPerSecond
     } = useContext(PowerAppContext);
 
 
@@ -22,13 +23,14 @@ const SPTableSection = (props) => {
     const renderTableRows = ()=>{
         if (powerList) {
             return powerList.map((powerDetail,index) =>{
-                const {name,object} = powerDetail;
+                const {name,object} = powerDetail;                
                 return <tr>
                 <th scope="row">{name}</th>
+                <td>{object.rank}</td>
                 <td>Gain {object.number}PL per second</td>
                 <td>{object.require}PL to next Level</td>
                 <td>
-                    <Button className="btn btn-outline-secondary" onClick={()=>upgPower(index)}>Level Up!</Button>
+                    <Button variant="secondary" className="btn" onClick={()=>{upgPower(index,powerDetail);upgPLPerSecond(object.require);}}>Level Up!</Button>
                 </td>
             </tr>;
             })
